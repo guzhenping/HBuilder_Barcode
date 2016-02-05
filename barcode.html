@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script src="js/mui.min.js"></script>
+    <link href="css/mui.min.css" rel="stylesheet"/>
+        <style>
+    		p { 
+    		width:100%; 
+    		display:block;
+    		line-height:1.5em;
+    	 	overflow:visible; 
+    	 	font-size:15px; 
+    	 	color: #007AFF;
+    	 	text-shadow:#0000FF 0px 0px 0px, 
+    	 	#FFC0CB 0px 0px 0;
+    	 }
+    </style>
+    <script type="text/javascript" charset="utf-8">
+      	mui.init();
+    </script>
+        	<script type="text/javascript" >
+// 扩展API加载完毕后调用onPlusReady回调函数 
+document.addEventListener( "plusready", onPlusReady, false );
+// 扩展API加载完毕，现在可以正常调用扩展API
+function onPlusReady() {
+	var e = document.getElementById("scan");
+	e.removeAttribute( "disabled" );
+	
+}
+var scan = null;
+function onmarked( type, result ) {
+	var text = '未知: ';
+	switch(type){
+		case plus.barcode.QR:
+		text = 'QR: ';
+		break;
+		case plus.barcode.EAN13:
+		text = 'EAN13: ';
+		break;
+		case plus.barcode.EAN8:
+		text = 'EAN8: ';
+		break;
+	}
+	alert( text+result );
+	document.getElementById("result").innerText= text+result ;
+	//mui.back();
+}
+function startRecognize() {
+	scan = new plus.barcode.Barcode('bcid');
+	scan.onmarked = onmarked; 
+	scan.start();
+
+}
+function cancelScan() {
+	scan.cancel();
+}
+
+	</script>
+    
+    <style> 
+   html,body{
+	margin: 0px;
+	padding: 0px;
+	height: 100%;
+	}
+	#bcid {
+	background:#B7B7B7;
+	height:200px;
+	width:200px;
+	}
+	</style>
+
+    
+    
+</head>
+<body>
+	<header class="mui-bar  mui-bar-nav">
+		<a class=" mui-action-back mui-icon mui-icon-left-nav  mui-pull-left"></a>
+		<h1 class="mui-title"> 扫一扫 </h1>
+	</header>
+	
+	<div class="mui-content" align="center">
+		<div id= "bcid"></div>
+		<br>
+	<input align="center" type='button' class=" mui-btn mui-btn-royal" onclick="startRecognize()" value='开始' />
+	<input type='button' onclick='cancelScan()' value='暂停' />
+		<br/>
+	
+     <div class="row mui-input-row">
+		<textarea id='result' rows=7" class="mui-input-clear " placeholder="扫描结果..."></textarea>
+	 </div>
+					    
+	</div>
+	
+	
+</body>
+</html>
