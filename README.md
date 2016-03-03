@@ -7,5 +7,6 @@
 
 ##核心代码
 尽量去看官网的API----Barcode(http://www.html5plus.org/doc/zh_cn/barcode.html)
-我这里用到的只是很少的部分。
+我这里用到的只是很少的部分。Barcode模块管理条码扫描，提供常见的条码（二维码及一维码）的扫描识别功能，可调用设备的摄像头对条码图片扫描进行数据输入。通过plus.barcode可获取条码码管理对象。
+
 
